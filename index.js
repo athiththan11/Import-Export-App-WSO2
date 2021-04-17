@@ -103,7 +103,7 @@ async function registerClient() {
 			}
 		);
 
-		if (LOG.debug) {
+		if (LOG.response) {
 			logger.debug(beautify(response_dcr.data, null, 4));
 		}
 
@@ -146,7 +146,7 @@ async function generateToken(client_id, client_secret) {
 			}
 		);
 
-		if (LOG.debug) {
+		if (LOG.response) {
 			logger.debug(beautify(response_token.data, null, 4));
 		}
 
@@ -177,7 +177,7 @@ async function listApplications(access_token) {
 			}
 		);
 
-		if (LOG.debug) {
+		if (LOG.response) {
 			logger.debug(beautify(response_applications.data, null, 4));
 		}
 
@@ -280,7 +280,7 @@ async function importApplication(access_token) {
 				}
 			);
 
-			if (LOG.debug) {
+			if (LOG.response) {
 				logger.debug(beautify(response_import.data, null, 4));
 			}
 
@@ -289,12 +289,22 @@ async function importApplication(access_token) {
 
 			// map existing oauth keys
 
-			if (
-				metadata.keyManagerWiseOAuthApp &&
-				metadata.keyManagerWiseOAuthApp.PRODUCTION &&
-				metadata.keyManagerWiseOAuthApp.PRODUCTION.Keycloak
-			) {
-				await mapOauthKeys(metadata, applicationId, 'Keycloak', 'PRODUCTION', access_token);
+			for (let keymanager of ENVIRONMENT_CONF['keymanagers']) {
+				if (
+					metadata.keyManagerWiseOAuthApp &&
+					metadata.keyManagerWiseOAuthApp.PRODUCTION &&
+					metadata.keyManagerWiseOAuthApp.PRODUCTION[keymanager]
+				) {
+					await mapOauthKeys(metadata, applicationId, keymanager, 'PRODUCTION', access_token);
+				}
+
+				if (
+					metadata.keyManagerWiseOAuthApp &&
+					metadata.keyManagerWiseOAuthApp.SANDBOX &&
+					metadata.keyManagerWiseOAuthApp.SANDBOX[keymanager]
+				) {
+					await mapOauthKeys(metadata, applicationId, keymanager, 'SANDBOX', access_token);
+				}
 			}
 		}
 	} catch (error) {
@@ -341,7 +351,7 @@ async function mapOauthKeys(metadata, applicationId, keymanager, keytype, access
 		}
 	);
 
-	if (LOG.debug) {
+	if (LOG.response) {
 		logger.debug(beautify(response_map.data, null, 4));
 	}
 
@@ -373,7 +383,7 @@ async function revokeToken(access_token, client_id, client_secret) {
 			}
 		);
 
-		if (LOG.debug) {
+		if (LOG.response) {
 			logger.debug(beautify(response_revoke.data, null, 4));
 		}
 

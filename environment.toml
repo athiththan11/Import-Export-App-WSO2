@@ -1,6 +1,7 @@
 username = 'admin'
 password = 'admin'
 scopes = 'apim:admin apim:app_import_export apim:app_owner_change apim:subscribe apim:app_manage'
+keymanagers = ['Keycloak']
 
 [apim]
 hostname = 'https://localhost:9443'
@@ -26,4 +27,5 @@ saas_app = true
 
 # winston logger configurations
 [log]
-debug = false
+debug = true
+response = false
