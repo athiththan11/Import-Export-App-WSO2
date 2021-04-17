@@ -1,0 +1,44 @@
+{
+  "name": "import-export-app-wso2",
+  "version": "1.0.0",
+  "description": "import and export applications in wso2 api manager v3.2.0",
+  "main": "index.js",
+  "bin": {
+    "import-export-app-wso2": "./bin/import-export-app-wso2"
+  },
+  "directories": {
+    "exported": "exported",
+    "logs": "logs",
+    "bin": "bin"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "athiththan11",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/athiththan11/Import-Export-App-WSO2"
+  },
+  "bugs": {
+    "url": "https://github.com/athiththan11/Import-Export-App-WSO2/issues"
+  },
+  "homepage": "https://github.com/athiththan11/Import-Export-App-WSO2#readme",
+  "keywords": [
+    "import-export-app-wso2"
+  ],
+  "dependencies": {
+    "await-sleep": "0.0.1",
+    "axios": "0.21.1",
+    "form-data": "4.0.0",
+    "https": "1.0.0",
+    "json-beautify": "1.1.1",
+    "log-timestamp": "0.3.0",
+    "moment-timezone": "0.5.33",
+    "node-stream-zip": "1.13.3",
+    "querystring": "0.2.1",
+    "toml": "3.0.0",
+    "winston": "3.3.3",
+    "yargs": "16.2.0"
+  }
+}

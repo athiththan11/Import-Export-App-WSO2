@@ -1,0 +1,29 @@
+username = 'admin'
+password = 'admin'
+scopes = 'apim:admin apim:app_import_export apim:app_owner_change apim:subscribe apim:app_manage'
+
+[apim]
+hostname = 'https://localhost:9443'
+
+# export application configurations
+[export]
+withKeys = true
+
+# import application configurations
+[import]
+preserveOwner = true
+skipSubscriptions = true
+skipApplicationKeys = true
+update = false
+
+# dynamic client registration configurations
+[dynamic_client_registration]
+client_name = 'import_export_nodejs'
+callback_url = 'http://localhost'
+owner = 'admin'
+grant_types = 'password refresh_token'
+saas_app = true
+
+# winston logger configurations
+[log]
+debug = false
