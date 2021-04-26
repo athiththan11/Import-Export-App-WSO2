@@ -22,7 +22,7 @@ update = false
 client_name = 'import_export_nodejs'
 callback_url = 'http://localhost'
 owner = 'admin'
-grant_types = 'password refresh_token'
+grant_types = 'client_credentials password'
 saas_app = true
 
 # winston logger configurations
