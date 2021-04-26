@@ -83,7 +83,7 @@ async function registerClient() {
 		logger.info('registering a dynamic client');
 
 		let request_dcr = {
-			callbackUrl: ENVIRONMENT_CONF.dynamic_client_registration.callback_url,
+			// callbackUrl: ENVIRONMENT_CONF.dynamic_client_registration.callback_url,
 			clientName: ENVIRONMENT_CONF.dynamic_client_registration.client_name,
 			owner: ENVIRONMENT_CONF.dynamic_client_registration.owner,
 			grantType: ENVIRONMENT_CONF.dynamic_client_registration.grant_types,
@@ -244,12 +244,13 @@ async function importApplication(access_token) {
 
 		for (let z of zips) {
 			let zip = new StreamZip.async({ file: path.join(__dirname, 'exported', z) });
+			let zip_entries = await zip.entries();
 
-			let name = z.split('_')[1].split('.')[0];
-			let owner = z.split('_')[0];
-
-			let zip_data = await zip.entryData(name + '/' + name + '.json');
+			let name = zip_entries[Object.keys(zip_entries)[0]]['name'];
+			let zip_data = await zip.entryData(zip_entries[Object.keys(zip_entries)[0]]['name']);
 			let metadata = JSON.parse(zip_data.toString());
+
+			let owner = metadata['owner'];
 
 			if (LOG.debug) {
 				logger.debug(`metadata of ${name}.json`);
